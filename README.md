@@ -1,6 +1,6 @@
 <!--# Azure-SOC-Honeynet-Project-->
 # Building a SOC + Honeynet in Azure (Live Traffic)
-![SOC Honeynet (1)](https://github.com/0xbythesecond/Azure-SOC-Honeynet-Project/assets/23303634/43177fa9-4746-4f8d-8774-f9aca74b891d)
+![Cloud Honeynet / SOC](https://i.imgur.com/ZWxe03e.jpg)
 
 ## Introduction
 In this project, I build a mini honeynet in Azure and ingest log sources from various resources into a Log Analytics workspace, which is then used by Microsoft Sentinel to build attack maps, trigger alerts, and create incidents. I measured some security metrics in the insecure environment for 24 hours, apply some security controls to harden the environment, measure metrics for another 24 hours, then show the results below. The metrics we will show are:
@@ -38,22 +38,22 @@ In this project, I build a mini honeynet in Azure and ingest log sources from va
 - ***Analysis after implementing remediation measures:*** An additional 24-hour period was dedicated to the meticulous re-observation of the environment, facilitating a comprehensive evaluation of the security metrics. The resulting data was then meticulously juxtaposed with the initial baseline, enabling a rigorous comparative analysis.
 
 ## Architecture Before Hardening / Security Controls
-![Architecture Diagram](https://i.imgur.com/gBvHJo4.gif)
+![Architecture Diagram](https://i.imgur.com/aBDwnKb.jpg)
 In the "BEFORE" measurement phase, it was observed that all resources were initially provisioned with direct internet exposure. The Virtual Machines were configured with open Network Security Groups and permissive built-in firewalls, while other resources were deployed with publicly accessible endpoints, thereby rendering the usage of Private Endpoints unnecessary.
 
 ## Architecture After Hardening / Security Controls
-![Architecture Diagram](https://i.imgur.com/oQtbais.gif)
+![Architecture Diagram](https://i.imgur.com/YQNa9Pp.jpg)
 In the "AFTER" evaluation stage, the Network Security Groups underwent fortification measures whereby all traffic, with the exception of my administrative workstation, was comprehensively blocked. Additionally, other resources were fortified by leveraging their built-in firewalls alongside the implementation of Private Endpoint functionality.
 
 ## Attack Maps Before Hardening / Security Controls
 The visual representation presented below provides an overview of the assault endeavors targeted at a publicly accessible Microsoft SQL server throughout a span of 24 hours. The plotted data points on the map delineate the precise origins of these attacks or attempted logins.
-![MSSQL Allowed Access](https://i.imgur.com/UHVHIGM.png) <br />
+![NSG Allowed Inbound Malicious Flows](https://i.imgur.com/1qvswSX.png)<br>
 
 The depicted attack map elucidates the multitude of syslog authentication failures encountered by the Linux server I provisioned, elucidating the presence of unsanctioned endeavors to gain entry from external sources beyond the confines of the local network. This serves as an emphatic reminder underscoring the indispensability of fortifying Linux servers with robust authentication protocols and diligently scrutinizing system logs to detect and thwart potential intrusions.
-![Linux Syslog Auth Failures](https://i.imgur.com/8QbjEwL.png) <br />
+![Linux Syslog Auth Failures](https://i.imgur.com/G1YgZt6.png)<br>
 
 The exhibited attack map encapsulates a multitude of RDP (Remote Desktop Protocol) and SMB (Server Message Block) failures, vividly exemplifying the unrelenting endeavors of potential assailants to exploit these specific protocols. The visual depiction accentuates the imperative nature of fortifying remote access and file-sharing services as a means to safeguard against illicit entry and mitigate the looming cyber threats that may ensue.
-![Windows RDP/SMB Auth Failures](https://i.imgur.com/ALHFE3u.png) <br />
+![Windows RDP/SMB Auth Failures](https://i.imgur.com/ESr9Dlv.png)<br>
 
 The illustrated attack map serves as a compelling showcase of the ramifications stemming from the act of leaving the Network Security Group (NSG) unrestricted, thereby facilitating the unhindered ingress of malicious network traffic. This visualization effectively emphasizes the criticality of deploying robust security protocols, including the imposition of stringent NSG rules, as a means to thwart unauthorized entry and mitigate the inherent risks posed by potential threats.
 ![NSG Allowed Inbound Malicious Flows](https://i.imgur.com/W2iCXmv.png)
